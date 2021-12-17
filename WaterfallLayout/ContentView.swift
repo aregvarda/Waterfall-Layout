@@ -24,7 +24,15 @@ struct ContentView: View {
                     }
                 }
             }.padding()
-        }
+        }.navigationBarTitle("Categories")
+            .navigationBarItems(leading: Button {
+                
+            } label: {
+                Image(systemName: "arrow.backward")
+            }, trailing: Button {
+            } label: {
+                Image(systemName: "magnifyingglass")
+            })
     }
 }
 
@@ -36,8 +44,8 @@ struct Card: Hashable {
 let leftCards: [Card] = [
     .init(title: "Kick Boxing",
           imageName: "kickboxing"),
-    .init(title: "Boxing",
-          imageName: "boxing"),
+    .init(title: "Run",
+          imageName: "run"),
     .init(title: "Morning",
           imageName: "morning"),
     .init(title: "Fitness",
@@ -51,7 +59,7 @@ let rightCards: [Card] = [
           imageName: "intervals"),
     .init(title: "Yoga",
           imageName: "yoga"),
-    .init(title: "Run",
+    .init(title: "Boxing",
           imageName: "boxing")
 ]
 
@@ -60,20 +68,22 @@ struct CardView: View {
     var body: some View {
         GeometryReader { proxy in
             ZStack {
-        Image(card.imageName)
-            .resizable()
-            .scaledToFill()
-            .frame(
-                width: proxy.size.width,
-                height: proxy.size.height
-            )
-            .clipped()
-            .cornerRadius(10)
-            .overlay(RoundedRectangle(cornerRadius: 10).fill(Color(.gray).opacity(0.4)))
+                Image(card.imageName)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(
+                        width: proxy.size.width,
+                        height: proxy.size.height
+                    )
+                    .clipped()
+                    .cornerRadius(10)
+                    .overlay(RoundedRectangle(cornerRadius: 10).fill(Color(.gray).opacity(0.4)))
                 Text(card.title.uppercased())
                     .font(.title3)
                     .fontWeight(.heavy)
-                    .multilineTextAlignment(<#T##alignment: TextAlignment##TextAlignment#>)
+                    .multilineTextAlignment(.center)
+                    .padding(8)
+                    .foregroundColor(.white)
             }
         }
     }
@@ -81,6 +91,8 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        NavigationView {
+            ContentView()
+        }.accentColor(.primary)
     }
 }

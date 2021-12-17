@@ -11,7 +11,9 @@ import SwiftUI
 struct WaterfallLayoutApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                ContentView()
+            }.accentColor(.primary)
         }
     }
 }
