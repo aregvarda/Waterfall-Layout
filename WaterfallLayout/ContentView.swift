@@ -58,7 +58,24 @@ let rightCards: [Card] = [
 struct CardView: View {
     let card: Card
     var body: some View {
-        RoundedRectangle(cornerRadius: 10)
+        GeometryReader { proxy in
+            ZStack {
+        Image(card.imageName)
+            .resizable()
+            .scaledToFill()
+            .frame(
+                width: proxy.size.width,
+                height: proxy.size.height
+            )
+            .clipped()
+            .cornerRadius(10)
+            .overlay(RoundedRectangle(cornerRadius: 10).fill(Color(.gray).opacity(0.4)))
+                Text(card.title.uppercased())
+                    .font(.title3)
+                    .fontWeight(.heavy)
+                    .multilineTextAlignment(<#T##alignment: TextAlignment##TextAlignment#>)
+            }
+        }
     }
 }
 
